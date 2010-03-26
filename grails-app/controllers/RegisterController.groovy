@@ -1,6 +1,3 @@
-
-
-
 import org.springframework.security.providers.UsernamePasswordAuthenticationToken as AuthToken
 import org.springframework.security.context.SecurityContextHolder as SCH
 
@@ -115,8 +112,17 @@ class RegisterController {
         person.bio = params.bio
 		person.website = params.website
         person.blogFeed = params.blogFeed
-        person.twitterNickname = params.twitterNickname     		
-
+        person.twitterNickname = params.twitterNickname
+		if (params.avatar) {
+			if (params.avatar.equalsIgnoreCase(Avatar.LOCAL.name)) {
+				person.avatar = Avatar.LOCAL
+				bindData(person, params, [exclude:['passwd']])
+			}
+			else if (params.avatar.equalsIgnoreCase(Avatar.GRAVATAR.name)) {
+				person.avatar = Avatar.GRAVATAR
+			}
+		}
+		
 		if (person.save()) {
 			redirect action: show, id: person.id
 		}
@@ -137,8 +143,7 @@ class RegisterController {
 		}
 
 		def person = new User()
-//		person.properties = params
-      bindData(person,params)
+        bindData(person,params)
 
 		def config = authenticateService.securityConfig
 		def defaultRole = config.security.defaultRole
@@ -201,6 +206,14 @@ class RegisterController {
 		else {
 			person.passwd = ''
 			render view: 'index', model: [person: person]
+		}
+	}
+	
+	def renderImage = {
+    	def userInstance = User.get(params.id)
+		if (userInstance?.photo) {
+			response.setContentLength(userInstance.photo.length)
+			response.outputStream.write(userInstance.photo)
 		}
 	}
 }

@@ -1,3 +1,4 @@
+import com.lucastex.grails.fileuploader.UFile
 import EventAttendeeRegistration
 import EventSpeakerAssignment
 import Role
@@ -32,6 +33,9 @@ class User {
   boolean moderated = false
   boolean speakerOnly = false
   String whyIWantToJoin
+  Avatar avatar
+  byte[] photo
+
 
   /** plain password to create a MD5 password    */
   String pass = '[secret]'
@@ -49,10 +53,17 @@ class User {
     blogFeed(nullable: true, url: true)
     twitterNickname(nullable: true)
     whyIWantToJoin(blank: false, maxSize: 4000)
+    avatar(nullable: false,
+		validator: { avatar, user ->
+			if (avatar == Avatar.LOCAL) 
+				if (user.photo?.size() == 0)  
+					return "picture.required.for.local.avatar"
+		})
+	photo(nullable:true, size:0..10000000)
   }
 
   String toString() {
-    "${firstName} ${lastName}"
+    "${firstName} ${lastName} ${avatar}"
   }
 
 

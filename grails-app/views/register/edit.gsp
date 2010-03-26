@@ -20,7 +20,7 @@
     </div>
   </g:hasErrors>
 
-  <g:form>
+  <g:uploadForm>
     <input type="hidden" name="id" value="${person.id}"/>
     <input type="hidden" name="version" value="${person.version}"/>
     <div class="dialog">
@@ -137,6 +137,24 @@
             <input type="text" id="twitterNickname" name="twitterNickname" value="${fieldValue(bean: person, field: 'twitterNickname')}"/>
           </td>
         </tr>
+        
+        <tr class="prop">
+          <td valign="top" class="name">
+            <label for="avatar">Avatar:</label>
+          </td>
+          <td valign="top" class="value ${hasErrors(bean: person, field: 'avatar', 'errors')}">
+            <g:select name="avatar" from="${Avatar?.values()}" noSelection="${['':'-Select Avatar type-']}" />
+          </td>
+        </tr>
+        
+		<tr class="prop">
+          <td valign="top" class="name">
+             <label for="photo">Photo</label>
+          </td>
+          <td valign="top" class="value ${hasErrors(bean: person, field: 'photo', 'errors')}">
+             <input type="file" id="photo" name="photo" />          
+          </td>
+        </tr>
 
         </tbody>
       </table>
@@ -146,7 +164,7 @@
       <span class="button"><g:actionSubmit class='save' value="Update"/></span>
     </div>
 
-  </g:form>
+  </g:uploadForm>
 
 </div>
 </body>

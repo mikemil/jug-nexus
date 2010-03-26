@@ -5,7 +5,12 @@
 
   <div class="entry">
     <div class="userBio">
-      <avatar:gravatar email="${person.email}" cssClass="showUserAvatar"/><g:xwikiRender>${person.bio}</g:xwikiRender>
+      <g:if test="${person.avatar == Avatar.GRAVATAR}">
+      	<avatar:gravatar email="${person.email}" cssClass="showUserAvatar"/><g:xwikiRender>${person.bio}</g:xwikiRender>
+      </g:if>
+      <g:else>
+      	<img alt="Local photo" class="showUserAvatar" src="<g:createLink controller='register' action='renderImage' id='${person.id}'/>"/>
+      </g:else>
     </div>
 
     <ul class="userInfo">

@@ -31,7 +31,7 @@ class BootStrap {
       def speakerRole = new Role(authority: "ROLE_SPEAKER", description: "Event speaker role.").save()
 
       new User(username: "mstine", passwd: authenticateService.encodePassword("changeme"),
-              firstName: "Matt", lastName: "Stine",
+              firstName: "Matt", lastName: "Stine", avatar: Avatar.GRAVATAR, 
               email: "matt.stine@gmail.com", whyIWantToJoin: "I started the JUG!", moderated: true, bio: "Temporary Bio!").addToAuthorities(memberRole).addToAuthorities(adminRole).addToAuthorities(speakerRole).save()
     }
 
@@ -43,7 +43,7 @@ class BootStrap {
     def speakerRole = new Role(authority: "ROLE_SPEAKER", description: "Event speaker role.").save()
 
     new User(username: "mstine", passwd: authenticateService.encodePassword("password"),
-            firstName: "Matt", lastName: "Stine",
+            firstName: "Matt", lastName: "Stine",  avatar: Avatar.GRAVATAR,
             email: "matt.stine@gmail.com", whyIWantToJoin: "I started the JUG!", moderated: true, bio: """Lorem ipsum dolor sit amet, consectetur adipiscing
 elit. Phasellus tincidunt dolor porta nisl bibendum auctor. Ut ac turpis ut eros rutrum iaculis. Ut id ante ipsum. Ut ut est sit amet arcu ultricies ultricies
 vitae eu dolor. Cras id lectus eu massa volutpat lacinia ut nec tellus. Nam dapibus massa sit amet tellus vulputate quis varius mauris porta. Etiam laoreet nisi
@@ -52,7 +52,7 @@ fermentum dapibus elit, nec dictum odio vestibulum eu. Cras enim metus, facilisi
 faucibus velit ultricies. Cras pretium urna quis velit egestas sed vulputate mauris vulputate. Duis nec erat nec tortor tempor placerat sed id tellus.""").addToAuthorities(memberRole).addToAuthorities(adminRole).addToAuthorities(speakerRole).save()
 
     new User(username: "kdonald", passwd: authenticateService.encodePassword("password"),
-            firstName: "Keith", lastName: "Donald",
+            firstName: "Keith", lastName: "Donald",  avatar: Avatar.GRAVATAR,
             email: "keith.donald@springsource.com", whyIWantToJoin: "I started the JUG!", moderated: true, bio: """Our speaker for this event is Keith Donald. Keith is a principal and founding partner at SpringSource, the company behind Spring. He is best known in the Spring community for creating Spring Web Flow. At SpringSource, Keith is the lead of the Web Application Development Products Team. His team, based in Melbourne, Florida, sustains the development of Spring MVC and Web Flow and their associated integrations, and is also responsible for future innovations in the domain of web application development frameworks.
 
 Since the first Spring Experience in 2005, Keith, with Jay Zimmerman of NoFluffJustStuff Software Symposiums, has served as director of the popular conference series.
@@ -62,23 +62,23 @@ Keith is also the principal architect behind SpringSourceÕs state-of-the-art tra
 Over his career, Keith, an experienced enterprise software developer and mentor, has built business applications for customers spanning a diverse set of industries including banking, network management, information assurance, education, and retail. He is particularly adept at translating business requirements into technical solutions. """).addToAuthorities(speakerRole).save()
 
     new User(username: "jneely", passwd: authenticateService.encodePassword("password"),
-            firstName: "Joel", lastName: "Neely",
+            firstName: "Joel", lastName: "Neely",   avatar: Avatar.GRAVATAR,
             email: "joel.neely@gmail.com", whyIWantToJoin: "I've been coding since the 60's!", moderated: true).addToAuthorities(memberRole).save()
 
     new User(username: "mmayo", passwd: authenticateService.encodePassword("password"),
-            firstName: "Michael", lastName: "Mayo",
+            firstName: "Michael", lastName: "Mayo",  avatar: Avatar.GRAVATAR,
             email: "michael.mayo@gmail.com", whyIWantToJoin: "I write Android apps!", moderated: true).addToAuthorities(memberRole).save()
 
     new User(username: "joeuser", passwd: authenticateService.encodePassword("password"),
-            firstName: "Joe", lastName: "User",
+            firstName: "Joe", lastName: "User",  avatar: Avatar.GRAVATAR,
             email: "joe.user@gmail.com", whyIWantToJoin: "Test", moderated: true).addToAuthorities(memberRole).save()
 
     new User(username: "janeuser", passwd: authenticateService.encodePassword("password"),
-            firstName: "Jane", lastName: "User",
+            firstName: "Jane", lastName: "User",  avatar: Avatar.GRAVATAR,
             email: "jane.user@gmail.com", whyIWantToJoin: "Test", moderated: true).addToAuthorities(memberRole).save()
 
     new User(username: "jeduser", passwd: authenticateService.encodePassword("password"),
-            firstName: "Jed", lastName: "User",
+            firstName: "Jed", lastName: "User",  avatar: Avatar.GRAVATAR,
             email: "Jed.user@gmail.com", whyIWantToJoin: "Test", moderated: true).addToAuthorities(memberRole).save()
 
     new Event(title: "Pragmatic JMS", startTime: new Date("01/01/2009 18:00:00"), endTime: new Date("01/01/2009 20:30:00"),
@@ -106,7 +106,7 @@ Over his career, Keith, an experienced enterprise software developer and mentor,
 
     1.upto(25) {i ->
       def dummy = new User(username: "user${i}", passwd: authenticateService.encodePassword("password"),
-              firstName: "User", lastName: "${i}",
+              firstName: "User", lastName: "${i}",  avatar: Avatar.GRAVATAR,
               email: "user.${i}@gmail.com", whyIWantToJoin: "Test", moderated: true).addToAuthorities(memberRole).save()
       event.addToRegistrations(new EventAttendeeRegistration(user: dummy)).save()
 

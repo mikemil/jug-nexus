@@ -27,7 +27,12 @@ Released   : 20081016
   <div id="header">
     <h1><a href="http://www.memphisjug.org">Memphis/Mid-South JUG</a></h1>
     <g:isLoggedIn>
-      <avatar:gravatar email="${loggedInUserInfo(field:'email')}"/>
+      <g:if test="${loggedInUserInfo(field:'avatar').readAsString() == 'GRAVATAR'}">  
+      	<avatar:gravatar email="${loggedInUserInfo(field:'email').readAsString()}"/>
+      </g:if>
+      <g:else>
+        <img alt="Local Photo" src="<g:createLink controller='register' action='renderImage' id="${loggedInUserInfo(field:'id')}"/>"/>
+      </g:else>
       <h2>Welcome, <g:link controller="register"><g:loggedInUserInfo field="firstName"/></g:link>!<br/><span class="smallLink"><g:link controller="logout">Logout</g:link></span></h2>
     </g:isLoggedIn>
     <g:isNotLoggedIn>

@@ -20,7 +20,7 @@
     </div>
   </g:hasErrors>
 
-  <g:form action="save">
+  <g:form action="save" enctype="multipart/form-data">
     <div class="dialog">
       <table>
         <tbody>
@@ -142,6 +142,24 @@
           </td>
           <td valign="top" class="value ${hasErrors(bean: person, field: 'whyIWantToJoin', 'errors')}">
             <textarea rows="5" cols="40" name="whyIWantToJoin">${fieldValue(bean: person, field: 'whyIWantToJoin')}</textarea>
+          </td>
+        </tr>
+
+        <tr class="prop">
+          <td valign="top" class="name">
+            <label for="avatar">Avatar:</label>
+          </td>
+          <td valign="top" class="value ${hasErrors(bean: person, field: 'avatar', 'errors')}">
+            <g:select name="avatar" from="${Avatar?.values()}" noSelection="${['':'--Select Avatar type--']}"/>
+          </td>
+        </tr>
+		
+        <tr class="prop" id="photo_row">
+          <td valign="top" class="name">
+             <label for="photo">Photo</label>
+          </td>
+          <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'photo', 'errors')}">
+             <input type="file" id="photo" name="photo" />          
           </td>
         </tr>
 
